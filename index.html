@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏔️ Filzmoos 2026 – Průvodce výletem</title>
+<script>
+  // Inform Google Sites parent frame of our height so embed resizes correctly
+  function reportHeight() {
+    const h = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'dimensions', height: h }, '*');
+    // Also try the Google Sites specific format
+    window.parent.postMessage(JSON.stringify({ sentinel: 'amp', type: 'embed-size', height: h }), '*');
+  }
+  window.addEventListener('load', reportHeight);
+  window.addEventListener('resize', reportHeight);
+  // Report periodically for dynamic content
+  setInterval(reportHeight, 500);
+</script>
+<style>
+  :root {
+    --green: #2d6a4f;
+    --green-light: #40916c;
+    --beige: #f8f4f0;
+    --brown: #6b4226;
+    --orange: #e07b39;
+    --blue: #1a6ea8;
+    --text: #2c2c2c;
+    --border: #ddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--beige); color: var(--text); line-height: 1.6; font-size: 15px; }
+
+  /* HEADER */
+  header { background: linear-gradient(135deg, var(--green), var(--green-light)); color: white; padding: 24px 20px; text-align: center; }
+  header h1 { font-size: 1.8em; margin-bottom: 6px; }
+  header p { opacity: 0.9; font-size: 0.95em; }
+  .meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 12px; }
+  .meta span { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 0.85em; }
+
+  /* NAV */
+  nav { background: white; border-bottom: 2px solid var(--green); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0; padding: 0 10px; }
+  nav li a { display: block; padding: 10px 14px; color: var(--green); text-decoration: none; font-size: 0.85em; font-weight: 600; white-space: nowrap; }
+  nav li a:hover { background: var(--beige); border-bottom: 3px solid var(--green); }
+
+  /* MAIN */
+  main { max-width: 960px; margin: 20px auto; padding: 0 16px 40px; }
+  section { margin-bottom: 32px; }
+
+  /* HEADINGS */
+  h2 { font-size: 1.4em; color: var(--green); border-left: 4px solid var(--green); padding-left: 12px; margin: 28px 0 16px; }
+  h3 { font-size: 1.1em; color: var(--brown); margin: 20px 0 8px; }
+  h4 { font-size: 1em; color: var(--green-light); margin: 14px 0 6px; }
+
+  /* CARDS */
+  .card { background: white; border-radius: 10px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-left: 4px solid var(--green-light); }
+  .card-gold { border-left-color: #e6a817; }
+  .card-red { border-left-color: #c0392b; }
+  .card-blue { border-left-color: var(--blue); }
+
+  .stars { color: #e6a817; font-size: 1.1em; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75em; font-weight: 700; margin-right: 4px; }
+  .badge-green { background: #d4edda; color: #155724; }
+  .badge-red { background: #f8d7da; color: #721c24; }
+  .badge-blue { background: #d1ecf1; color: #0c5460; }
+  .badge-orange { background: #fff3cd; color: #856404; }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.88em; }
+  th { background: var(--green); color: white; padding: 8px 10px; text-align: left; }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
+  tr:hover td { background: #f9f9f9; }
+  tr:last-child td { border-bottom: none; }
+
+  /* INFO BOXES */
+  .tip { background: #e8f5e9; border-left: 4px solid var(--green); padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 12px 0; font-size: 0.9em; }
+  .warning { background: #fff8e1; border-left: 4px solid #f9a825; padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 12px 0; font-size: 0.9em; }
+  .important { background: #fdecea; border-left: 4px solid #c0392b; padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 12px 0; font-size: 0.9em; }
+  .review { background: #f0f4ff; border-left: 4px solid var(--blue); padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.88em; font-style: italic; }
+
+  /* PRICE BOXES */
+  .price-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
+  .price-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 120px; text-align: center; }
+  .price-box .amount { font-size: 1.4em; font-weight: 700; color: var(--green); }
+  .price-box .label { font-size: 0.75em; color: #666; }
+  .price-group { background: #f0f9f0; border: 1px solid var(--green-light); border-radius: 8px; padding: 12px; margin: 10px 0; }
+  .price-total { font-size: 1.1em; font-weight: 700; color: var(--green); }
+
+  /* ROUTE MAP */
+  .route { background: #f8f8f8; border: 1px solid var(--border); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.85em; line-height: 1.8; margin: 10px 0; }
+
+  /* DETAIL ROW */
+  .detail-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; font-size: 0.88em; }
+  .detail-row span { display: flex; align-items: center; gap: 4px; }
+
+  /* DAY PLAN */
+  .day-card { background: white; border-radius: 10px; padding: 16px; margin-bottom: 12px; border-top: 4px solid var(--green); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+  .day-header { font-size: 1.05em; font-weight: 700; color: var(--green); margin-bottom: 10px; }
+  .day-item { display: flex; gap: 10px; padding: 5px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.88em; }
+  .day-time { font-weight: 700; color: var(--brown); min-width: 50px; }
+
+  /* LINKS */
+  a { color: var(--blue); }
+  a:hover { text-decoration: underline; }
+  .btn { display: inline-block; padding: 6px 14px; background: var(--green); color: white; border-radius: 20px; text-decoration: none; font-size: 0.82em; font-weight: 600; margin: 4px 2px; }
+  .btn:hover { background: var(--green-light); color: white; text-decoration: none; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 20px; color: #888; font-size: 0.82em; border-top: 1px solid var(--border); margin-top: 40px; }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.4em; }
+    nav li a { padding: 8px 10px; font-size: 0.78em; }
+    .price-row { flex-direction: column; }
+    h2 { font-size: 1.2em; }
+  }
+
+  /* PRINT */
+  @media print {
+    nav, .btn { display: none; }
+    .card { box-shadow: none; border: 1px solid #ccc; }
+    body { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏔️ Filzmoos 2026 – Průvodce výletem</h1>
+  <p>Salzburger Land, Pongau, Rakousko</p>
+  <div class="meta">
+    <span>📍 Haus Dachstein, Nestlerweg 3, Filzmoos</span>
+    <span>📅 1.–6. července 2026</span>
+    <span>👨‍👩‍👧 5 dospělých + dítě 1,5 roku</span>
+    <span>🏍️ 3 motorky + 1 auto</span>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#soutezky">🌊 Soutěsky</a></li>
+    <li><a href="#priroda">🏔️ Příroda</a></li>
+    <li><a href="#motorky">🏍️ Motorky</a></li>
+    <li><a href="#podzemí">⛏️ Doly</a></li>
+    <li><a href="#farmy">🐄 Farmy</a></li>
+    <li><a href="#restaurace">🍽️ Jídlo</a></li>
+    <li><a href="#pocasi">☔ Déšť</a></li>
+    <li><a href="#karty">💳 Slevy</a></li>
+    <li><a href="#dny">📅 Plán</a></li>
+    <li><a href="#dite">👶 Dítě</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- SOUTĚSKY -->
+<section id="soutezky">
+<h2>🌊 Soutěsky – porovnání 5 míst</h2>
+<div class="tip">💡 Přijeďte ráno (před 10h) nebo odpoledne (po 15h). Pláštěnku berte vždy – vlhkost a postřik jsou všude.</div>
+
+<div class="card card-gold">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <h3>Liechtensteinklamm – nejlepší v okolí</h3>
+  <div class="detail-row">
+    <span>📍 28 km / 30 min</span>
+    <span class="badge badge-orange">€16 dospělý</span>
+    <span class="badge badge-green">€9 student</span>
+    <span class="badge badge-green">do 6 let zdarma</span>
+    <span class="badge badge-red">❌ kočárek</span>
+    <span class="badge badge-green">✅ nosítko</span>
+  </div>
+  <p style="margin:8px 0">Nejhlubší soutěska v Alpách – stěny až 300 m, šířka pár metrů, 1 km lávek, vodopád na konci. 2. nejkrásnější místo Rakouska 2022.</p>
+  <div class="review">💬 "Přijeli jsme v 9h ráno, skoro nikdo tam nebyl, krásné světlo."</div>
+  <div class="review">💬 "S malým dítětem v šátku bez problému, jen vezměte pláštěnku."</div>
+  <div class="price-group">
+    <strong>Vaše skupina:</strong> 4×€16 + 1×€9 (student) + dítě zdarma = <span class="price-total">€73</span><br>
+    <small>Se SalzburgerLand Card: <strong>zdarma!</strong></small>
+  </div>
+  <a href="https://www.liechtensteinklamm.at" target="_blank" class="btn">🌐 Web</a>
+  <a href="https://maps.google.com/maps?q=Liechtensteinklamm+St+Johann+im+Pongau" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <div class="stars">⭐⭐⭐⭐</div>
+  <h3>Salzachöfen – zdarma, méně turistů</h3>
+  <div class="detail-row">
+    <span>📍 35 km / 35 min</span>
+    <span class="badge badge-green">Vstup zdarma!</span>
+    <span class="badge badge-red">❌ kočárek</span>
+    <span class="badge badge-green">✅ nosítko</span>
+  </div>
+  <p style="margin:8px 0">Kaňon hloubky 90 m, kde Salzach prořízla vápencové skály. Kolébka alpského raftingu. Turistická stezka se schody. Autentičtější a bez front.</p>
+  <div class="tip">⚠️ Po dešti ověřit stav vody před odjezdem.</div>
+  <a href="https://maps.google.com/maps?q=Salzach%C3%B6fen+Golling" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card card-blue">
+  <div class="stars">⭐⭐⭐⭐</div>
+  <h3>Bluntautal – vhodné pro kočárek! 🌟</h3>
+  <div class="detail-row">
+    <span>📍 42 km / 40 min</span>
+    <span class="badge badge-green">Vstup zdarma</span>
+    <span class="badge badge-green">✅ kočárek celá trasa!</span>
+    <span class="badge badge-green">✅ nosítko</span>
+  </div>
+  <p style="margin:8px 0">Romantické 4km údolí, lesní cesta podél potoka, 2 horská jezírka, hostinec Bärenhütte. Minimální převýšení – ideální s kočárkem nebo malým dítětem.</p>
+  <div class="tip">💡 Kombinovat s Gollinger Wasserfall (100m vodopád, obojí je v Gollingu)</div>
+  <a href="https://maps.google.com/maps?q=Bluntautal+Golling" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <div class="stars">⭐⭐⭐</div>
+  <h3>Gollinger Wasserfall – 100m vodopád</h3>
+  <div class="detail-row">
+    <span>📍 42 km / 40 min</span>
+    <span class="badge badge-orange">~€4 dospělý</span>
+    <span class="badge badge-red">❌ kočárek</span>
+    <span class="badge badge-green">✅ nosítko</span>
+  </div>
+  <p style="margin:8px 0">Přirozený krasový vodopád, přístupný od roku 1805. Cesta přes skalní průchody. <strong>Kombinovat s Bluntautal</strong> – oba jsou v Gollingu!</p>
+  <a href="https://maps.google.com/maps?q=Gollinger+Wasserfall" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<h3>📊 Srovnání na první pohled</h3>
+<table>
+  <tr><th>Soutěska</th><th>Km</th><th>Vstup</th><th>Kočárek</th><th>Náročnost</th><th>Hodnocení</th></tr>
+  <tr><td><strong>Liechtensteinklamm</strong></td><td>28</td><td>€16/os.</td><td>❌</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td></tr>
+  <tr><td><strong>Salzachöfen</strong></td><td>35</td><td>zdarma</td><td>❌</td><td>⭐⭐</td><td>⭐⭐⭐⭐</td></tr>
+  <tr><td><strong>Bluntautal</strong></td><td>42</td><td>volný</td><td>✅</td><td>⭐</td><td>⭐⭐⭐⭐</td></tr>
+  <tr><td><strong>Gollinger Wasserfall</strong></td><td>42</td><td>~€4/os.</td><td>❌</td><td>⭐⭐</td><td>⭐⭐⭐</td></tr>
+</table>
+</section>
+
+<!-- PŘÍRODA -->
+<section id="priroda">
+<h2>🏔️ Příroda – vodopády, jeskyně, ledovce</h2>
+
+<div class="card card-gold">
+  <h3>🧊 Eisriesenwelt – Největší ledová jeskyně světa</h3>
+  <div class="detail-row">
+    <span>📍 30 km / 35 min</span>
+    <span class="badge badge-orange">€41 online / €45 na místě</span>
+    <span class="badge badge-red">❌ kočárek</span>
+    <span class="badge badge-green">✅ nosítko</span>
+  </div>
+  <div class="important">⚠️ DÍTĚ MUSÍ MÍT ZIMNÍ OBLEČENÍ – uvnitř je pod 0°C celou hodinu! Kombinéza, čepice, rukavice.</div>
+  <p style="margin:8px 0">42 km ledových chodeb, teplota pod 0°C, 1400 schodů, průvodce s karbidovou lampou. Od parkoviště celkem 3 hodiny (20 min pěšky + lanovka + 20 min + 1h jeskyně).</p>
+  <div class="review">💬 "Přijít na první ranní slot 9:30 – nejkrásnější světlo a málo lidí."</div>
+  <div class="review">💬 "Dítě v šátku s zimní kombinézou – bez problému, uvnitř opravdu mrzne."</div>
+  <div class="price-group">
+    <strong>Vaše skupina (online):</strong> 4×€41 + 1×€30 (student) + dítě zdarma = <span class="price-total">€194</span><br>
+    <small>Se SalzburgerLand Card: <strong>zdarma! (úspora €194)</strong></small>
+  </div>
+  <div class="important">📅 Povinná online rezervace s časovým slotem! Rezervujte předem.</div>
+  <a href="https://www.eisriesenwelt.at/de/" target="_blank" class="btn">🌐 Web + rezervace</a>
+  <a href="https://maps.google.com/maps?q=Eisriesenwelt+Werfen" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <h3>🏔️ Dachstein Gletscher + Eispalast + Hängebrücke</h3>
+  <div class="detail-row">
+    <span>📍 15 km / 20 min</span>
+    <span class="badge badge-orange">€73 Kombi dospělý</span>
+    <span class="badge badge-red">❌ kočárek na atrakce</span>
+    <span class="badge badge-green">✅ nosítko</span>
+  </div>
+  <p style="margin:8px 0">Gondola na 2700m (6 min), Eispalast uvnitř ledovce (-2 až -5°C), visutý most 400m nad propastí, výhled na 30 třítisícovek.</p>
+  <div class="price-row">
+    <div class="price-box"><div class="amount">€73</div><div class="label">Kombi dospělý</div></div>
+    <div class="price-box"><div class="amount">€55,50</div><div class="label">Kombi student</div></div>
+    <div class="price-box"><div class="amount">€61</div><div class="label">Jen gondola</div></div>
+    <div class="price-box"><div class="amount">€13,50</div><div class="label">Jen atrakce</div></div>
+  </div>
+  <div class="important">📅 Fixplatzbuchung (rezervace gondoly) povinná online! + €2,90/os.</div>
+  <a href="https://tickets.derdachstein.at/" target="_blank" class="btn">🌐 Rezervace</a>
+  <a href="https://maps.google.com/maps?q=Dachstein+Gletscherbahn+Ramsau" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <h3>💧 Krimmler Wasserfälle – Nejvyšší vodopády Rakouska</h3>
+  <div class="detail-row">
+    <span>📍 75 km / 75 min</span>
+    <span class="badge badge-green">~€5 dospělý</span>
+    <span class="badge badge-blue">✅ kočárek ke spodní části</span>
+  </div>
+  <p style="margin:8px 0">380m vysoké vodopády ve 3 stupních. Ke spodnímu stupni kočárek OK (15 min od parkoviště). Celá trasa: nosítko, 4km, 2–3 hodiny. Pláštěnka povinná!</p>
+  <div class="price-group">
+    <strong>Vaše skupina:</strong> 5×€5 + dítě zdarma = <span class="price-total">~€25</span> | Se SalzburgerLand Card: zdarma
+  </div>
+  <a href="https://www.krimmler-wasserwelten.at" target="_blank" class="btn">🌐 Web</a>
+</div>
+
+<div class="card">
+  <h3>🦫 Bachlalm + Svišti (Murmeltiere)</h3>
+  <div class="detail-row">
+    <span>📍 5 km / 10 min</span>
+    <span class="badge badge-green">Shuttle z Filzmoos</span>
+    <span class="badge badge-blue">✅ kočárek OK</span>
+  </div>
+  <p style="margin:8px 0">Alpské jezírko, kolonie 30+ divokých svišťů – nejsou plachí! Murmeltierexpress shuttle z Filzmoos. Ideální pro první nebo poslední den.</p>
+  <a href="https://maps.google.com/maps?q=Bachlalm+Filzmoos" target="_blank" class="btn">📍 Mapa</a>
+</div>
+</section>
+
+<!-- MOTORKY -->
+<section id="motorky">
+<h2>🏍️ Motorkářské trasy</h2>
+<div class="warning">⚠️ Ráno do 9h mohou být průsmyky uzavřené kvůli ledu (zejm. Grossglockner). Zkontrolovat stav silnice na webu před odjezdem. Nejlepší čas: 9–10h.</div>
+
+<div class="card card-gold">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <h3>Trasa A: Radstädter Tauernpass – doporučená!</h3>
+  <div class="detail-row"><span>📍 ~110 km</span><span>⏱️ 2,5 h jízdy</span><span class="badge badge-green">Bez mýtného</span></div>
+  <div class="route">Filzmoos → Radstadt → Radstädter Tauernpass 1739m<br>→ Mauterndorf → Tamsweg (Lungau) → Untertauern → Filzmoos</div>
+  <p>Alpský průsmyk, serpentiny, Lungau = nejslunečnější kraj Rakouska. Kombinovat s Burg Mauterndorf.</p>
+</div>
+
+<div class="card">
+  <div class="stars">⭐⭐⭐⭐</div>
+  <h3>Trasa B: Hochkönig okruh</h3>
+  <div class="detail-row"><span>📍 ~100 km</span><span>⏱️ 2 h</span><span class="badge badge-green">Bez mýtného</span></div>
+  <div class="route">Filzmoos → Bischofshofen → Werfen → Maria Alm → Dienten → Mühlbach → Filzmoos</div>
+  <p>Výhledy na Hochkönig 2941m. Kombinovat s Eisriesenwelt nebo Hohenwerfen (oba u Werfenu).</p>
+</div>
+
+<div class="card card-gold">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <h3>Trasa C: Grossglockner – vrcholný zážitek</h3>
+  <div class="detail-row"><span>📍 ~250 km</span><span>⏱️ celý den</span><span class="badge badge-orange">€36,50/motorka</span><span class="badge badge-orange">€46,50/auto</span></div>
+  <div class="route">Filzmoos → Zell am See → Fusch (pokladna) → Grossglockner 48km<br>→ Kaiser-Franz-Josefs-Höhe (ledovec Pasterze) → zpět nebo přes Heiligenblut</div>
+  <p>48km panoramatické silnice, 36 serpentin. Pro 3 motorky + auto: <strong>3×€36,50 + €46,50 = €156 celkem</strong> na vstup.</p>
+  <a href="https://www.grossglockner.at/de/fuer-ihren-besuch/preise-oeffnungszeiten" target="_blank" class="btn">🌐 Ceny + stav silnice</a>
+</div>
+
+<div class="card">
+  <div class="stars">⭐⭐⭐⭐</div>
+  <h3>Trasa D: Gerlospass + Zillertal</h3>
+  <div class="detail-row"><span>📍 ~200 km</span><span>⏱️ celý den</span><span class="badge badge-orange">Gerlos mýtné ~€14/moto</span></div>
+  <div class="route">Filzmoos → Zell am See → Gerlospass → Zillertal → zpět Gerlosem nebo přes Brenner</div>
+  <p>Méně přetíženější než Grossglockner, krásné výhledy, Zillertal údolí.</p>
+</div>
+
+<div class="card">
+  <div class="stars">⭐⭐⭐⭐</div>
+  <h3>Trasa E: Obertauern okruh</h3>
+  <div class="detail-row"><span>📍 ~120 km</span><span>⏱️ 2,5 h</span><span class="badge badge-green">Bez mýtného</span></div>
+  <div class="route">Filzmoos → Radstadt → Obertauern 1740m → Tweng → Mauterndorf → Radstadt → Filzmoos</div>
+</div>
+</section>
+
+<!-- SOLNÉ DOLY -->
+<section id="podzemí">
+<h2>⛏️ Solné doly a zajímavé podzemí</h2>
+
+<div class="card card-gold">
+  <h3>🧂 Salzwelten – Solné doly (Bad Dürrnberg nebo Hallstatt)</h3>
+  <div class="detail-row">
+    <span>📍 Bad Dürrnberg: 55 km / 50 min</span>
+    <span>📍 Hallstatt: 75 km / 70 min</span>
+    <span class="badge badge-orange">~€22 dospělý</span>
+  </div>
+  <p style="margin:8px 0">Podzemní solný důl s tunely, podzemním jezerem a <strong>skluzavkami</strong>! Hallstatt navíc jako UNESCO vesnička u jezera. Přesně ta věc co doma nezažijete.</p>
+  <div class="price-group">
+    <strong>Skupina:</strong> 5×€22 + 1×€12 (dítě) = <span class="price-total">~€122</span> | Se SalzburgerLand Card: <strong>zdarma!</strong>
+  </div>
+  <a href="https://www.salzwelten.at" target="_blank" class="btn">🌐 Web</a>
+</div>
+
+<div class="card">
+  <h3>⛏️ Bergwerk Schwaz – Středověké stříbrné doly (Tyrolsko)</h3>
+  <div class="detail-row"><span>📍 ~130 km / 100 min</span><span class="badge badge-orange">~€20 dospělý</span></div>
+  <p>Největší středověký stříbrný důl světa, průjezd vláčkem. Delší výlet – kombinovat s Gerlospassem nebo Zillertálem.</p>
+  <a href="https://www.silberbergwerk.at" target="_blank" class="btn">🌐 Web</a>
+</div>
+</section>
+
+<!-- FARMY -->
+<section id="farmy">
+<h2>🐄 Farmy, sýry, lokální produkty</h2>
+<div class="tip">💡 Tohle je ten zážitek – dřevěné prkno se sýry, uzené maso, čerstvé mléko od krávy. Ve Filzmoos to máte doslova za rohem.</div>
+
+<h3>🛒 Ab Hof prodejny přímo ve Filzmoos</h3>
+<table>
+  <tr><th>Místo</th><th>Adresa</th><th>Otevírací doba</th><th>Co nabízí</th></tr>
+  <tr><td><strong>Nestlerhof 🌟</strong></td><td>Nestlerweg 10<br><small>(7 min od vašeho ubytování!)</small></td><td>do 19:00</td><td>Vejce, mléko, sýr ab hof</td></tr>
+  <tr><td><strong>Selbstbedienungs-Hofladen Kirchgasshof</strong></td><td>Kirchgassweg 1</td><td><strong>do 22:00!</strong></td><td>Samoobslužný hofladen, otevřeno skoro pořád</td></tr>
+  <tr><td><strong>Wexlerhof</strong></td><td>Wexlerweg 2</td><td>zavolat</td><td>Ab hof prodej, +43 664 3828200</td></tr>
+  <tr><td><strong>Bauernmarkt Kirchgasshof</strong></td><td>Kirchgassweg 1</td><td>sezónně (ověřit)</td><td>Farmářský trh</td></tr>
+</table>
+
+<h3>🧀 Almy s Brettljause a domácími sýry</h3>
+<table>
+  <tr><th>Alm</th><th>Výška</th><th>Přístup</th><th>Co dostat</th></tr>
+  <tr><td><strong>Kirchgasshütte / Aualm</strong></td><td>1366 m</td><td>Shuttle nebo pěšky 1h</td><td>Brettljause, Kaspressknödel, Kaiserschmarrn</td></tr>
+  <tr><td><strong>Oberhofalm</strong></td><td>1268 m</td><td>Pěšky 45 min</td><td>Brettljause, čerstvé mléko, rodinná farma</td></tr>
+  <tr><td><strong>Unterhofalm</strong></td><td>1280 m</td><td>Pěšky 30 min</td><td>Almjause, domácí produkty</td></tr>
+  <tr><td><strong>Schwaigalm</strong></td><td>1358 m</td><td>Pěšky 1h</td><td>Käsesnitte, Jause, alpský sýr</td></tr>
+  <tr><td><strong>Hofpürglhütte</strong></td><td>1705 m</td><td>Pěšky 2,5h (nebo 45 min z Aualm)</td><td>Domácí jídla, horská atmosféra – jen hotovost!</td></tr>
+</table>
+
+<div class="tip">🧀 <strong>Sennerei Ramsau am Dachstein</strong> (~25 km) – tradičn salašnická výroba alpského sýra. Zeptat se v Filzmoos Tourismus na konkrétní aktuální adresu.</div>
+<div class="tip">🏺 <strong>Dachstein-Destillerie Mandlberggut</strong> – 10 km od Filzmoos (Mandlbergweg 11, Mandling). Lokální palírna alpských destilátů a likérů. Otevřeno do 18h.</div>
+</section>
+
+<!-- RESTAURACE -->
+<section id="restaurace">
+<h2>🍽️ Restaurace a almy</h2>
+
+<h3>Ve Filzmoos</h3>
+<table>
+  <tr><th>Restaurace</th><th>Cena/os.</th><th>Specialita</th><th>Poznámka</th></tr>
+  <tr><td>☕ <strong>Café Hirschenau</strong></td><td>€5–15</td><td>Dorty, snídaně, káva</td><td>Nejlepší kavárna ve Filzmoos</td></tr>
+  <tr><td>🍺 <strong>De Hiatabuam</strong></td><td>€12–22</td><td>Lokální kuchyně, Schnitzel</td><td>Oblíbené u místních</td></tr>
+  <tr><td>🏘️ <strong>Gasthof Fiakerwirt</strong></td><td>€12–20</td><td>Guláš, Schnitzel</td><td>Klasický gasthof</td></tr>
+  <tr><td>🍔 <strong>MeiZeit Lodge</strong></td><td>€15–25</td><td>Burgery, steaky</td><td>Otevřeno do 22h, moderní</td></tr>
+  <tr><td>🍝 <strong>Mamma Norica</strong></td><td>€15–25</td><td>Italsko-alpská kuchyně</td><td>Rodinná atmosféra</td></tr>
+  <tr><td>🥩 <strong>Panorama Reithof</strong></td><td>€25–40</td><td>Steaky, výhled na Bischofsmütze</td><td>Nejhezčí výhled</td></tr>
+</table>
+
+<div class="tip">🎟️ <strong>AlmCard Filzmoos</strong> = slevy na jídlo na 20+ almách v okolí. Ověřit cenu u Filzmoos Tourismus. <a href="https://www.filzmoos.at/de/services/almcard-filzmoos.html" target="_blank">filzmoos.at/almcard</a></div>
+</section>
+
+<!-- DÉŠŤ -->
+<section id="pocasi">
+<h2>☔ Program na deštivý den</h2>
+<table>
+  <tr><th>Atrakce</th><th>Vzdálenost</th><th>Cena skupina</th><th>Proč je OK za deště</th></tr>
+  <tr><td>🧊 <strong>Eisriesenwelt</strong></td><td>30 km</td><td>~€194 / zdarma s kartou</td><td>Pod zemí, vždy mráz a nádhera</td></tr>
+  <tr><td>🧂 <strong>Salzwelten Bad Dürrnberg</strong></td><td>55 km</td><td>~€122 / zdarma s kartou</td><td>Tunely, skluzavky, podzemní jezero</td></tr>
+  <tr><td>🏔️ <strong>Dachstein Eispalast</strong></td><td>15 km</td><td>~€67 (jen atrakce)</td><td>Gondola + ledový palác</td></tr>
+  <tr><td>🏙️ <strong>Salzburg Haus der Natur</strong></td><td>80 km</td><td>~€60</td><td>Příroda, vesmír, reptilie – ne jen historie</td></tr>
+  <tr><td>🏰 <strong>Burg Mauterndorf</strong></td><td>35 km</td><td>~€45</td><td>Středověký hrad, interíér</td></tr>
+  <tr><td>🏺 <strong>Dachstein-Destillerie</strong></td><td>10 km</td><td>levné / zdarma</td><td>Palírna alpských destilátů</td></tr>
+</table>
+</section>
+
+<!-- SLEVOVÉ KARTY -->
+<section id="karty">
+<h2>💳 Slevové karty</h2>
+
+<div class="card">
+  <h3>SalzburgerLand Card (6 dní) – €103/dospělý, €52/dítě</h3>
+  <div class="price-group">
+    <strong>Pro skupinu 5+1:</strong> 5×€103 + 1×€52 = <span class="price-total">€567</span><br><br>
+    <strong>Zahrnuje zdarma:</strong> Eisriesenwelt (~€194) + Hohenwerfen (~€75) + Liechtensteinklamm (~€73) + Krimmler Wasserfälle (~€25) + Salzwelten (~€122) + Zoo Salzburg + Festung + ...<br><br>
+    ✅ <strong>Vyplatí se pokud navštívíte alespoň 5 atrakcí ze seznamu</strong> + výlet do Salzburgu.<br>
+    ❌ Nevyplatí se pokud jen 2–3 atrakce.
+  </div>
+  <a href="https://www.salzburgerland.com/de/salzburgerland-card/" target="_blank" class="btn">🌐 Koupit online</a>
+</div>
+
+<div class="card">
+  <h3>Filzmoos Sommer Card – pravděpodobně zdarma pro hosty</h3>
+  <p>Slevy na místní lanovky, turistické autobusy, atrakce v okolí Filzmoos. Zeptat se na recepci Haus Dachstein ihned po příjezdu!</p>
+</div>
+
+<div class="card">
+  <h3>AlmCard Filzmoos – slevy na almách</h3>
+  <p>Zlevněné nebo fixní ceny na jídlo na 20+ almách a hüttách. Ověřit cenu u Filzmoos Tourismus (Dorfstraße 12).</p>
+  <a href="https://www.filzmoos.at/de/services/almcard-filzmoos.html" target="_blank" class="btn">🌐 Info</a>
+</div>
+</section>
+
+<!-- PLÁN DNÍ -->
+<section id="dny">
+<h2>📅 Navrhovaný program 5 dní</h2>
+
+<div class="day-card">
+  <div class="day-header">Den 1 – Středa 1.7. – Příjezd + okolí</div>
+  <div class="day-item"><div class="day-time">po příjezdu</div><div>Nestlerhof (7 min pěšky) – koupit sýr, mléko, vejce</div></div>
+  <div class="day-item"><div class="day-time">odpoledne</div><div>Procházka Filzmoos, Bachlalm + svišti (Murmeltierexpress)</div></div>
+  <div class="day-item"><div class="day-time">večeře</div><div>De Hiatabuam nebo Café Hirschenau</div></div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">Den 2 – Čtvrtek 2.7. – Werfen kombo</div>
+  <div class="day-item"><div class="day-time">9:00</div><div>Burg Hohenwerfen – ukázka sokolnictví v 11h!</div></div>
+  <div class="day-item"><div class="day-time">oběd</div><div>Gasthof Stegerwirt Werfen (~€15/os.)</div></div>
+  <div class="day-item"><div class="day-time">13:30</div><div>Eisriesenwelt – <strong>slot rezervovat online předem!</strong></div></div>
+  <div class="day-item"><div class="day-time">17:00</div><div>Zpět do Filzmoos (~70 km okruh)</div></div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">Den 3 – Pátek 3.7. – Grossglockner (motorkáři)</div>
+  <div class="day-item"><div class="day-time">9:00</div><div>Motorky vyjíždějí na Grossglockner (Fusch vstup, €36,50/moto)</div></div>
+  <div class="day-item"><div class="day-time">paralelně</div><div>Auto s dítětem: Liechtensteinklamm nebo volný den na almách</div></div>
+  <div class="day-item"><div class="day-time">oběd</div><div>Restaurace Kaiser-Franz-Josefs-Höhe nebo Edelweißhütte</div></div>
+  <div class="day-item"><div class="day-time">celý den</div><div>Návrat cca 17–18h</div></div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">Den 4 – Sobota 4.7. – Soutěsky + farmy</div>
+  <div class="day-item"><div class="day-time">9:00</div><div>Liechtensteinklamm (přijet brzy, méně lidí!)</div></div>
+  <div class="day-item"><div class="day-time">oběd</div><div>Gasthof po soutěsce nebo Golling centrum</div></div>
+  <div class="day-item"><div class="day-time">odpoledne</div><div>Bluntautal + Gollinger Wasserfall (oba Golling, kočárek OK!)</div></div>
+  <div class="day-item"><div class="day-time">večeře</div><div>Kirchgasshütte / Aualm – Brettljause na almě!</div></div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">Den 5 – Neděle 5.7. – Salzburg nebo Krimmler</div>
+  <div class="day-item"><div class="day-time">Varianta A</div><div>Salzburg – Zoo Hellbrunn + Mirabellgarten + procházka Altstadt (kočárek OK!)</div></div>
+  <div class="day-item"><div class="day-time">Varianta B</div><div>Krimmler Wasserfälle + Gerlospass motorkáři</div></div>
+  <div class="day-item"><div class="day-time">večeře</div><div>Panorama Steakrestaurant Reithof – závěrečná večeře s výhledem</div></div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">Den 6 – Pondělí 6.7. – Odjezd</div>
+  <div class="day-item"><div class="day-time">ráno</div><div>Kirchgasshof samoobslužný hofladen – sýry na cestu (otevřeno do 22h = ráno OK)</div></div>
+  <div class="day-item"><div class="day-time">dopoledne</div><div>Dachstein-Destillerie Mandlberggut (10 km) – schnapps na cestu 😄</div></div>
+  <div class="day-item"><div class="day-time">poté</div><div>Odjezd domů</div></div>
+</div>
+</section>
+
+<!-- DÍTĚ -->
+<section id="dite">
+<h2>👶 Tipy pro cestování s dítětem 1,5 roku</h2>
+
+<h3>Co vzít s sebou</h3>
+<ul style="padding-left:20px; line-height:2">
+  <li>✅ Ergonomické nosítko/šátek – nutné pro soutěsky a jeskyně</li>
+  <li>✅ Terénní kočárek – pro Bluntautal, Salzburg Zoo, Filzmoos vesnice</li>
+  <li>✅ <strong>Zimní oblečení pro dítě</strong> (kombinéza, čepice, rukavice) – Eisriesenwelt + Dachstein Eispalast jsou pod 0°C!</li>
+  <li>✅ Pláštěnka pro dítě – Krimmler, Liechtensteinklamm, Salzachöfen</li>
+  <li>✅ Opalovací krém SPF50+ – ve výšce 2500m je UV 2× silnější</li>
+</ul>
+
+<h3>Kočárek vs nosítko</h3>
+<table>
+  <tr><th>Místo</th><th>Kočárek</th><th>Nosítko</th></tr>
+  <tr><td>Bluntautal</td><td>✅ celá trasa</td><td>✅</td></tr>
+  <tr><td>Bachlalm / Filzmoos vesnice</td><td>✅</td><td>✅</td></tr>
+  <tr><td>Salzburg Zoo Hellbrunn</td><td>✅</td><td>✅</td></tr>
+  <tr><td>Grossglockner parkoviště</td><td>✅</td><td>✅</td></tr>
+  <tr><td>Liechtensteinklamm</td><td>❌</td><td>✅ nutné!</td></tr>
+  <tr><td>Eisriesenwelt</td><td>❌</td><td>✅ + zimní oblečení!</td></tr>
+  <tr><td>Dachstein Eispalast</td><td>❌</td><td>✅ + zimní oblečení!</td></tr>
+  <tr><td>Burg Hohenwerfen</td><td>❌</td><td>✅</td></tr>
+</table>
+
+<h3>Kde bude dítě nejvíce nadšené</h3>
+<ol style="padding-left:20px; line-height:2">
+  <li>🦫 <strong>Bachlalm</strong> – svišti živě, jezírko, klid</li>
+  <li>🦅 <strong>Burg Hohenwerfen</strong> – sokolníci s dravými ptáky</li>
+  <li>🦒 <strong>Zoo Hellbrunn Salzburg</strong> – zvířata, kočárek OK</li>
+  <li>💧 <strong>Krimmler (spodní stupeň)</strong> – obrovský vodopád, nezapomenutelný zvuk</li>
+</ol>
+</section>
+
+</main>
+
+<footer>
+  <p>⚠️ Ceny ověřeny červen 2026 z oficiálních webů. Vždy ověřit aktuálnost před návštěvou.</p>
+  <p><strong>Eisriesenwelt a Dachstein: rezervovat online PŘEDEM – v červenci bývá plno!</strong></p>
+  <p style="margin-top:8px">Filzmoos, Salzburger Land, Pongau, Rakousko | červen 2026</p>
+</footer>
+
+</body>
+</html>
