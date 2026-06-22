@@ -100,6 +100,10 @@
   .day-item { display: flex; gap: 10px; padding: 5px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.88em; }
   .day-time { font-weight: 700; color: var(--brown); min-width: 50px; }
 
+  /* PHOTOS */
+  .card-img { width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 12px; display: block; }
+  @media (max-width: 600px) { .card-img { height: 160px; } }
+
   /* LINKS */
   a { color: var(--blue); }
   a:hover { text-decoration: underline; }
@@ -161,6 +165,7 @@
 <div class="tip">💡 Přijeďte ráno (před 10h) nebo odpoledne (po 15h). Pláštěnku berte vždy – vlhkost a postřik jsou všude.</div>
 
 <div class="card card-gold">
+  <img class="card-img" src="img/liechtensteinklamm.jpg" alt="Liechtensteinklamm" onerror="this.style.display='none'">
   <div class="stars">⭐⭐⭐⭐⭐</div>
   <h3>Liechtensteinklamm – nejlepší v okolí</h3>
   <div class="detail-row">
@@ -238,6 +243,7 @@
 <h2>🏔️ Příroda – vodopády, jeskyně, ledovce</h2>
 
 <div class="card card-gold">
+  <img class="card-img" src="img/eisriesenwelt.jpg" alt="Eisriesenwelt ledová jeskyně" onerror="this.style.display='none'">
   <h3>🧊 Eisriesenwelt – Největší ledová jeskyně světa</h3>
   <div class="detail-row">
     <span>📍 30 km / 35 min</span>
@@ -259,6 +265,7 @@
 </div>
 
 <div class="card">
+  <img class="card-img" src="img/dachstein.jpg" alt="Dachstein ledovec" onerror="this.style.display='none'">
   <h3>🏔️ Dachstein Gletscher + Eispalast + Hängebrücke</h3>
   <div class="detail-row">
     <span>📍 15 km / 20 min</span>
@@ -279,6 +286,7 @@
 </div>
 
 <div class="card">
+  <img class="card-img" src="img/krimmler.jpg" alt="Krimmler vodopády" onerror="this.style.display='none'">
   <h3>💧 Krimmler Wasserfälle – Nejvyšší vodopády Rakouska</h3>
   <div class="detail-row">
     <span>📍 75 km / 75 min</span>
@@ -293,6 +301,7 @@
 </div>
 
 <div class="card">
+  <img class="card-img" src="img/bachlalm.jpg" alt="Bachlalm Filzmoos" onerror="this.style.display='none'">
   <h3>🦫 Bachlalm + Svišti (Murmeltiere)</h3>
   <div class="detail-row">
     <span>📍 5 km / 10 min</span>
@@ -327,6 +336,7 @@
 
 <div class="card card-gold">
   <div class="stars">⭐⭐⭐⭐⭐</div>
+  <img class="card-img" src="img/grossglockner.jpg" alt="Grossglockner silnice" onerror="this.style.display='none'">
   <h3>Trasa C: Grossglockner – vrcholný zážitek</h3>
   <div class="detail-row"><span>📍 ~250 km</span><span>⏱️ celý den</span><span class="badge badge-orange">€36,50/motorka</span><span class="badge badge-orange">€46,50/auto</span></div>
   <div class="route">Filzmoos → Zell am See → Fusch (pokladna) → Grossglockner 48km<br>→ Kaiser-Franz-Josefs-Höhe (ledovec Pasterze) → zpět nebo přes Heiligenblut</div>
@@ -355,6 +365,7 @@
 <h2>⛏️ Solné doly a zajímavé podzemí</h2>
 
 <div class="card card-gold">
+  <img class="card-img" src="img/salzwelten.jpg" alt="Salzwelten solné doly" onerror="this.style.display='none'">
   <h3>🧂 Salzwelten – Solné doly (Bad Dürrnberg nebo Hallstatt)</h3>
   <div class="detail-row">
     <span>📍 Bad Dürrnberg: 55 km / 50 min</span>
