@@ -356,6 +356,33 @@
     h2 { background: none; color: #2d6a4f; border: 1px solid #2d6a4f; }
     body { font-size: 11px; }
   }
+
+  /* ACCORDION */
+  .accordion-toggle {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .accordion-toggle::after {
+    content: '▾';
+    font-size: 1.2em;
+    opacity: 0.8;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    min-width: 20px;
+    text-align: right;
+  }
+  .accordion-toggle.collapsed::after { transform: rotate(-90deg); }
+  .accordion-body {
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    max-height: 9999px;
+    opacity: 1;
+  }
+  .accordion-body.hidden { max-height: 0 !important; opacity: 0; }
 </style>
 </head>
 <body>
@@ -635,49 +662,137 @@
 <!-- PŘEHLED DALŠÍCH MÍST -->
 <section id="dalsi_prehled">
 <h2>🗺️ Přehled dalších míst v okolí</h2>
-<div class="tip">💡 Tato místa jsou v okolí – pro případ že budete mít čas nebo náladu na výlet mimo plán. Klikni na 📍 Mapa pro navigaci.</div>
 
-<h3 style="color:var(--green);margin:16px 0 8px" id="dalsi-soutezky">🌊 Další soutěsky a kaňony</h3>
-<table>
-  <tr><th>Místo</th><th>⭐</th><th>Km od Filzmoos</th><th>Poznámka</th><th>Mapa</th></tr>
-  <tr><td><strong>Silberkarklamm</strong></td><td>⭐4.8/403</td><td>~25 km</td><td>Soutěska + vodopád + via ferrata, u Ramsau am Dachstein</td><td><a href="https://maps.google.com/maps?q=Silberkarklamm+Ramsau" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Dachserfall</strong></td><td>⭐4.7/112</td><td>~35 km</td><td>Vodopád u Abtenau, přístupný od parkoviště, Kneipp koupaliště</td><td><a href="https://maps.google.com/maps?q=Dachserfall+Abtenau" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Tauglklamm</strong></td><td>⭐4.6</td><td>~40 km</td><td>Soutěska u Kuchlu, volný vstup</td><td><a href="https://maps.google.com/maps?q=Tauglklamm+Kuchl" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Donnersbachklamm</strong></td><td>⭐4.7/191</td><td>~50 km</td><td>Soutěska v regionu Schladming-Dachstein</td><td><a href="https://maps.google.com/maps?q=Donnersbachklamm" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Gesäuse NP – Weidendom</strong></td><td>⭐4.6/125</td><td>~80 km</td><td>Erlebniszentrum Národního parku Gesäuse – soutěska řeky Enns, dramatické skály</td><td><a href="https://maps.google.com/maps?q=Gesäuse+Weidendom+Nationalpark" target="_blank">📍</a></td></tr>
-</table>
+<h3>🌊 Další soutěsky</h3>
 
-<h3 style="color:var(--green);margin:16px 0 8px" id="vodopady">💧 Vodopády</h3>
-<table>
-  <tr><th>Místo</th><th>⭐</th><th>Km od Filzmoos</th><th>Poznámka</th><th>Mapa</th></tr>
-  <tr><td><strong>Salza Wasserfall</strong></td><td>⭐4.8/1074</td><td>~70 km</td><td>Impozantní vodopád u obce Salza, velmi oblíbený</td><td><a href="https://maps.google.com/maps?q=Salza+Wasserfall" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Riesachfälle + Riesachsee</strong></td><td>–</td><td>~35 km</td><td>Vodopády 70m (nejvyšší ve Štýrsku) + jezero Riesachsee. Alpinsteig Höll trasa: via ferrata úseky, mosty, žebříky – spectakulární! Alternativa pro kočárek cestou č.777. Parkování Seeleiten ~€11.</td><td><a href="https://maps.google.com/maps?q=Riesachfälle+Schladming" target="_blank">📍</a></td></tr>
-</table>
+<div class="card">
+  <img class="card-img" src="img/silberkarklamm.jpg" alt="Silberkarklamm" onerror="this.style.display='none'">
+  <h3>🌊 Silberkarklamm</h3>
+  <div class="detail-row"><span>📍 ~25 km / 25 min</span><span class="badge badge-blue">⭐4.8 / 403</span><span class="badge badge-green">Volný vstup</span></div>
+  <p style="margin:8px 0">Úzká soutěska u Ramsau am Dachstein — vodopád, dřevěné lávky a 3 via ferrata trasy podél ní. 1 hodina procházky, vhodné pro děti. Volné parkoviště vpravo od vstupu.</p>
+  <div class="review">💬 "At the Silberkarklamm Hutte there are plenty of options for another hikes – you can easily spend a day there." – TripAdvisor</div>
+  <a href="https://maps.google.com/maps?q=Silberkarklamm+Ramsau" target="_blank" class="btn">📍 Mapa</a>
+</div>
 
-<h3 style="color:var(--green);margin:16px 0 8px" id="vyhledy">🗻 Lanovky, vrcholy & průsmyky</h3>
-<table>
-  <tr><th>Místo</th><th>⭐</th><th>Km od Filzmoos</th><th>Poznámka</th><th>Mapa</th></tr>
-  <tr><td><strong>Krippenstein</strong></td><td>⭐4.8/73</td><td>~55 km</td><td>Vrchol nad Hallstattem, 5 Fingers vyhlídka, lanovka z Obertraun</td><td><a href="https://maps.google.com/maps?q=Krippenstein+Obertraun" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Stoderzinken</strong> (2048m)</td><td>–</td><td>~50 km</td><td>Snadno dosažitelný vrchol, kaple Friedenskircherl ve skále, zvonek pro štěstí! Toll road €20 z Gröbmingu. Výhledy na Schladminger Tauern.</td><td><a href="https://maps.google.com/maps?q=Stoderzinken+Gröbming" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Hochwurzen</strong></td><td>⭐4.7/6913</td><td>~25 km</td><td>Lanovka u Schladmingu, výhledy, letní aktivity, kombinovat s Planai</td><td><a href="https://maps.google.com/maps?q=Hochwurzen+Schladming" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Tauplitzalm</strong></td><td>⭐4.8/510</td><td>~55 km</td><td>Alpská planina s jezery, letní turistika i koupání</td><td><a href="https://maps.google.com/maps?q=Tauplitzalm" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Sölkpass</strong></td><td>⭐4.8/468</td><td>~50 km</td><td>Horský průsmyk pro motorkáře přes Sölktäler, krásná silnička</td><td><a href="https://maps.google.com/maps?q=Sölkpass" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Aussichtspunkt Gallhofkogl</strong></td><td>⭐5.0/2</td><td>~60 km</td><td>Vyhlídkový bod u Bad Aussee, méně navštívený</td><td><a href="https://maps.google.com/maps?q=Aussichtspunkt+Gallhofkogl+Bad+Aussee" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Ameisstein</strong></td><td>⭐4.8/177</td><td>~80 km</td><td>Turistická atrakce u Grünau im Almtal</td><td><a href="https://maps.google.com/maps?q=Ameisstein+Grünau" target="_blank">📍</a></td></tr>
-</table>
+<div class="card">
+  <h3>🌊 Dachserfall</h3>
+  <div class="detail-row"><span>📍 ~35 km / 35 min</span><span class="badge badge-blue">⭐4.7 / 112</span><span class="badge badge-green">Volný vstup</span><span class="badge badge-green">✅ kočárek k vodopádu</span></div>
+  <p style="margin:8px 0">Vodopád u Abtenau přístupný krátkou procházkou od parkoviště. U vstupu Kneipp koupaliště — osvěžení nohou v ledové vodě. Klidné, málo turistů.</p>
+  <a href="https://maps.google.com/maps?q=Dachserfall+Abtenau" target="_blank" class="btn">📍 Mapa</a>
+</div>
 
-<h3 style="color:var(--green);margin:16px 0 8px" id="parky">🦌 Zvířata a parky (pro dítě)</h3>
-<table>
-  <tr><th>Místo</th><th>⭐</th><th>Km od Filzmoos</th><th>Poznámka</th><th>Mapa</th></tr>
-  <tr><td><strong>Cumberland Wildpark Grünau</strong></td><td>⭐4.7/4874</td><td>~80 km</td><td>60 ha park divokých zvířat v lese, jeleni, daňci, rysi, medvědi. Restaurace, ideální pro rodiny.</td><td><a href="https://maps.google.com/maps?q=Cumberland+Wildpark+Grünau" target="_blank">📍</a></td></tr>
-</table>
+<div class="card">
+  <h3>🌊 Tauglklamm</h3>
+  <div class="detail-row"><span>📍 ~40 km / 40 min</span><span class="badge badge-blue">⭐4.6</span><span class="badge badge-green">Volný vstup</span></div>
+  <p style="margin:8px 0">Soutěska u Kuchlu, volný vstup. Méně turistická alternativa k Liechtensteinklamm.</p>
+  <a href="https://maps.google.com/maps?q=Tauglklamm+Kuchl" target="_blank" class="btn">📍 Mapa</a>
+</div>
 
-<h3 style="color:var(--green);margin:16px 0 8px" id="jezera">🏞️ Jezera a procházky</h3>
-<table>
-  <tr><th>Místo</th><th>⭐</th><th>Km od Filzmoos</th><th>Poznámka</th><th>Mapa</th></tr>
-  <tr><td><strong>Seewaldsee Seerundweg</strong></td><td>⭐4.8/65</td><td>~40 km</td><td>Okruh kolem jezera, kočárek OK, klidná příroda</td><td><a href="https://maps.google.com/maps?q=Seewaldsee+Seerundweg" target="_blank">📍</a></td></tr>
-  <tr><td><strong>Iriswiese-Trautenfels</strong></td><td>–</td><td>~55 km</td><td>Louka s kosatci u Schloss Trautenfels, sezónní (červen)</td><td><a href="https://maps.google.com/maps?q=Iriswiese+Trautenfels" target="_blank">📍</a></td></tr>
-</table>
+<div class="card">
+  <h3>🌊 Donnersbachklamm</h3>
+  <div class="detail-row"><span>📍 ~50 km / 50 min</span><span class="badge badge-blue">⭐4.7 / 191</span></div>
+  <p style="margin:8px 0">Soutěska v regionu Schladming-Dachstein. Divoká příroda, méně navštívená.</p>
+  <a href="https://maps.google.com/maps?q=Donnersbachklamm" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <h3>🌊 Gesäuse NP – Erlebniszentrum Weidendom</h3>
+  <div class="detail-row"><span>📍 ~80 km / 75 min</span><span class="badge badge-blue">⭐4.6 / 125</span></div>
+  <p style="margin:8px 0">Národní park Gesäuse — soutěska řeky Enns s dramatickými vápencovými skalami. Erlebniszentrum s interaktivními expozicemi. Kombinovat s výletem do Admontu (klášter s největší klášterní knihovnou světa).</p>
+  <a href="https://maps.google.com/maps?q=Gesäuse+Weidendom+Nationalpark" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<h3>💧 Vodopády</h3>
+
+<div class="card">
+  <img class="card-img" src="img/salza_wasserfall.jpg" alt="Salza Wasserfall" onerror="this.style.display='none'">
+  <h3>💧 Salza Wasserfall</h3>
+  <div class="detail-row"><span>📍 ~70 km / 65 min</span><span class="badge badge-blue">⭐4.8 / 1074</span><span class="badge badge-green">Volný vstup</span></div>
+  <p style="margin:8px 0">Jeden z nejimpozantnějších vodopádů Štýrska, u obce Salza. Přístupný krátkou procházkou. Velmi oblíbený — přijít ráno.</p>
+  <a href="https://maps.google.com/maps?q=Salza+Wasserfall" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <h3>💧 Riesachfälle + Riesachsee</h3>
+  <div class="detail-row"><span>📍 ~35 km / 35 min</span><span class="badge badge-orange">Parkování ~€11</span></div>
+  <p style="margin:8px 0">Nejvyšší vodopády Štýrska (70m). Trasa Alpinsteig Höll: via ferrata sekce, mosty, žebříky — spektakulární! Nahoře jezero Riesachsee s chatou Gföller Alm. <strong>Pro kočárek:</strong> alternativní cesta č. 777 přímo k jezeru bez via ferrata.</p>
+  <div class="tip">💡 S dítětem v kočárku nebo nosítku: cestou č. 777 přímo k jezeru, bez lezení.</div>
+  <a href="https://maps.google.com/maps?q=Riesachfälle+Schladming" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<h3>🗻 Lanovky & vrcholy</h3>
+
+<div class="card">
+  <img class="card-img" src="img/krippenstein.jpg" alt="Krippenstein" onerror="this.style.display='none'">
+  <h3>🗻 Krippenstein – 5 Fingers</h3>
+  <div class="detail-row"><span>📍 ~55 km / 50 min</span><span class="badge badge-blue">⭐4.8 / 73</span></div>
+  <p style="margin:8px 0">Vrchol nad Hallstattem s 5 Fingers vyhlídkovou plošinou. Lanovka z Obertraun (3 sekce). Po cestě ledová jeskyně a Mamutí jeskyně. Světové dědictví Spiral Viewpoint — zajímavější než 5 Fingers samotné.</p>
+  <div class="tip">💡 Parkoviště u dolní stanice: první hodina zdarma, pak €5/den. Lanovka jede od 8:40.</div>
+  <a href="https://maps.google.com/maps?q=Krippenstein+Obertraun" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <h3>🗻 Hochwurzen</h3>
+  <div class="detail-row"><span>📍 ~25 km / 25 min</span><span class="badge badge-blue">⭐4.7 / 6913</span></div>
+  <p style="margin:8px 0">Lanovka u Schladmingu s výhledy na Dachstein. V létě skvělý výchozí bod túr. Kombinovat s Planai a Spiegelsee jako celý den.</p>
+  <a href="https://maps.google.com/maps?q=Hochwurzen+Schladming" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <h3>🗻 Stoderzinken (2048 m)</h3>
+  <div class="detail-row"><span>📍 ~50 km / 50 min</span><span class="badge badge-orange">Toll road €20/auto</span></div>
+  <p style="margin:8px 0">Lehce dostupný vrchol s nečekaně krásnými výhledy. U vrcholu kaple Friedenskircherl vytesaná do skály — zazvoněte zvonem pro štěstí! Výhledy na Schladminger Tauern.</p>
+  <a href="https://maps.google.com/maps?q=Stoderzinken+Gröbming" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <img class="card-img" src="img/tauplitzalm.jpg" alt="Tauplitzalm" onerror="this.style.display='none'">
+  <h3>🗻 Tauplitzalm</h3>
+  <div class="detail-row"><span>📍 ~55 km / 55 min</span><span class="badge badge-blue">⭐4.8 / 510</span></div>
+  <p style="margin:8px 0">Alpská planina s řetězem jezer — letní turistika i koupání. Klidnější než Gosausee, méně turistů. Ideální na kočárku kolem jezer.</p>
+  <a href="https://maps.google.com/maps?q=Tauplitzalm" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <h3>🏍️ Sölkpass</h3>
+  <div class="detail-row"><span>📍 ~50 km / 50 min</span><span class="badge badge-blue">⭐4.8 / 468</span><span class="badge badge-green">Bez mýtného</span></div>
+  <p style="margin:8px 0">Horský průsmyk přes údolí Sölktäler — úzká silnička, nulový provoz, dramatická krajina. Ideální pro motorkáře jako alternativa k přetíženým trasám. Kombinovat se Sölktäler přírodním parkem.</p>
+  <a href="https://maps.google.com/maps?q=Sölkpass" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<h3>🦌 Zvířata & parky</h3>
+
+<div class="card">
+  <img class="card-img" src="img/cumberland.jpg" alt="Cumberland Wildpark" onerror="this.style.display='none'">
+  <h3>🦌 Cumberland Wildpark Grünau</h3>
+  <div class="detail-row"><span>📍 ~80 km / 75 min</span><span class="badge badge-blue">⭐4.7 / 4874</span></div>
+  <p style="margin:8px 0">60 hektarů parku divokých zvířat v lese — jeleni, daňci, rysi, medvědi, divočáci, vlci. Zvířata v přirozeném prostředí. Restaurace přímo v parku. Skvělé pro dítě v každém věku.</p>
+  <a href="https://maps.google.com/maps?q=Cumberland+Wildpark+Grünau" target="_blank" class="btn">📍 Mapa</a>
+  <a href="https://www.wildpark-grünau.at" target="_blank" class="btn">🌐 Web</a>
+</div>
+
+<h3>🏞️ Jezera & procházky</h3>
+
+<div class="card">
+  <h3>🏞️ Seewaldsee – okruh kolem jezera</h3>
+  <div class="detail-row"><span>📍 ~40 km / 40 min</span><span class="badge badge-blue">⭐4.8 / 65</span><span class="badge badge-green">✅ kočárek</span></div>
+  <p style="margin:8px 0">Klidné jezero s okruhovou trasou vhodnou pro kočárek. Koupání v létě, málo turistů. Perfektní výlet na procházku s dítětem.</p>
+  <a href="https://maps.google.com/maps?q=Seewaldsee+Seerundweg" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <h3>🌸 Iriswiese-Trautenfels</h3>
+  <div class="detail-row"><span>📍 ~55 km / 55 min</span><span class="badge badge-orange">Sezónní – červen/červenec</span></div>
+  <p style="margin:8px 0">Louka s divokými kosatci pod hradem Trautenfels. Unikátní přírodní podívaná, vhodná na kočárek. V sezóně kvetení je to nezapomenutelné.</p>
+  <a href="https://maps.google.com/maps?q=Iriswiese+Trautenfels" target="_blank" class="btn">📍 Mapa</a>
+</div>
+
+<div class="card">
+  <h3>⭐ Ameisstein</h3>
+  <div class="detail-row"><span>📍 ~80 km / 75 min</span><span class="badge badge-blue">⭐4.8 / 177</span></div>
+  <p style="margin:8px 0">Turistická atrakce u Grünau im Almtal s unikátním výhledem. Kombinovat s Cumberland Wildparkem — obojí je ve stejné oblasti.</p>
+  <a href="https://maps.google.com/maps?q=Ameisstein+Grünau" target="_blank" class="btn">📍 Mapa</a>
+</div>
 
 </section>
 
@@ -935,5 +1050,24 @@
   <p>Filzmoos, Salzburger Land, Pongau, Rakousko | červen 2026</p>
 </footer>
 
+
+<script>
+// Accordion: wrap each section's content
+document.querySelectorAll('section').forEach(sec => {
+  const h2 = sec.querySelector('h2');
+  if (!h2) return;
+  h2.classList.add('accordion-toggle');
+  // Wrap everything after h2 in accordion-body
+  const body = document.createElement('div');
+  body.classList.add('accordion-body');
+  while (h2.nextSibling) body.appendChild(h2.nextSibling);
+  sec.appendChild(body);
+  h2.addEventListener('click', () => {
+    const isHidden = body.classList.contains('hidden');
+    body.classList.toggle('hidden', !isHidden);
+    h2.classList.toggle('collapsed', !isHidden);
+  });
+});
+</script>
 </body>
 </html>
